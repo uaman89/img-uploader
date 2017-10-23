@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {UsersService} from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Img:Uploader';
+
+  constructor(us: UsersService) {
+    console.log(`users:`, us.users);
+  }
 }
