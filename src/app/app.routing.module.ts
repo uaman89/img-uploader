@@ -17,7 +17,7 @@ export const appRoutes: Routes = [
         path: 'view',
         children: [
           {path: 'table', component: TableViewComponent},
-          {path: 'block', component: BlockViewComponent},
+          {path: 'blocks', component: BlockViewComponent},
         ]
       },
     ]

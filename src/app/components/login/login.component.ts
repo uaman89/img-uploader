@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {IUserCredentials} from '../../services/auth.service';
+import {AuthService, IUserCredentials} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,21 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor() {
+  constructor(private auth: AuthService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
+  login() {
+    console.log('login!');
+    this.auth.login(this.user).then(result => {
+      if (result) {
+        console.log('navidate to blocks!');
+        this.router.navigate(['view/blocks']);
+      } else {
+        alert('Wrong user!');
+      }
+    });
+  }
 }
