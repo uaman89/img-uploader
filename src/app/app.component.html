@@ -9,7 +9,7 @@
         <a routerLink="view/table" routerLinkActive="active" class="nav-link">table</a>
         <a routerLink="view/blocks" routerLinkActive="active" class="nav-link">block</a>
         <a routerLink="upload" routerLinkActive="active" class="nav-link">upload</a>
-        <a routerLink="logout" routerLinkActive="active" class="nav-link">sign out</a>
+        <a (click)="logout($event)" href="#" class="nav-link">sign out</a>
       </ng-template>
 
       <ng-template [ngSwitchCase]="false">

@@ -10,11 +10,17 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'Img:Uploader';
 
-  constructor(public auth: AuthService, router: Router) {
-    if (!auth.isAuthorized){
+  constructor(public auth: AuthService, private router: Router) {
+    if (!auth.isAuthorized) {
       router.navigate(['login']);
     } else {
       router.navigate(['view/block']);
     }
+  }
+
+  public logout(e) {
+    e.preventDefault();
+    this.auth.logout();
+    this.router.navigate(['login']);
   }
 }
