@@ -1,14 +1,25 @@
 <div class="login-form">
   <h1>Login</h1>
-  <form>
-    <div class="form-group">
+  <form #loginForm="ngForm" (onSubmit)="login()">
+    <div class="form-group" [class.has-danger]="email.invalid">
       <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="example@example.com">
+      <input [ngModel]="user.email" name="email" #email="ngModel"
+             type="email" class="form-control" id="email" placeholder="user@gmail.com"
+             required>
+      <span *ngIf="email.invalid && (email.dirty || email.touched)" class="form-control-feedback">
+          Email is required
+      </span>
     </div>
-    <div class="form-group">
+    <div class="form-group" [class.has-danger]="password.invalid">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="test123">
+      <input [ngModel]="user.password" name="pass" #password="ngModel"
+             type="password" class="form-control" id="password" placeholder="test123"
+             required>
+      <span *ngIf="password.invalid && (password.dirty || password.touched)" class="form-control-feedback">
+          Password is required
+      </span>
+
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
