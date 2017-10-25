@@ -8,6 +8,8 @@ const clr = 'background: olive; color: white';
 export class AuthGuard implements CanActivate {
 
   constructor(private auth: AuthService) {
+    console.log('%c auth.isAuthorized:', clr, auth.isAuthorized);
+
   }
 
   public canActivate(): boolean {

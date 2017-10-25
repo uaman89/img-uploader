@@ -12,6 +12,7 @@ export class AuthService {
   public isAuthorized = false;
 
   constructor(private users: UsersService) {
+    this.isAuthorized = localStorage.getItem('isAuthorized') === 'true';
   }
 
   public login(user: IUserCredentials) {
@@ -22,8 +23,9 @@ export class AuthService {
 
       if (isUserExists) {
         this.isAuthorized = true;
+        localStorage.setItem('isAuthorized', this.isAuthorized.toString());
       } else {
-        this.isAuthorized = false;
+        this.logout();
       }
 
       return this.isAuthorized;
@@ -33,6 +35,7 @@ export class AuthService {
 
   public logout() {
     this.isAuthorized = false;
+    localStorage.removeItem('isAuthorized');
   }
 
 }

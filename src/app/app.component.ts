@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from './services/auth.service';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router, Event} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,15 @@ export class AppComponent {
     if (!auth.isAuthorized) {
       router.navigate(['login']);
     } else {
-      router.navigate(['view/block']);
+
+      router.events.subscribe((event: Event) => {
+        if (event instanceof NavigationEnd) {
+          if (event.url === '/') {
+            router.navigate(['view/blocks']);
+          }
+        }
+      });
+
     }
   }
 
