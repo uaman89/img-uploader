@@ -1,9 +1,9 @@
 <div class="login-form">
   <h1>Login</h1>
-  <form #loginForm="ngForm" (onSubmit)="login()">
+  <form #loginForm="ngForm" (ngSubmit)="login()">
     <div class="form-group" [class.has-danger]="email.invalid">
       <label for="email">Email</label>
-      <input [ngModel]="user.email" name="email" #email="ngModel"
+      <input [(ngModel)]="user.email" name="email" #email="ngModel"
              type="email" class="form-control" id="email" placeholder="user@gmail.com"
              required>
       <span *ngIf="email.invalid && (email.dirty || email.touched)" class="form-control-feedback">
@@ -12,7 +12,7 @@
     </div>
     <div class="form-group" [class.has-danger]="password.invalid">
       <label for="password">Password</label>
-      <input [ngModel]="user.password" name="pass" #password="ngModel"
+      <input [(ngModel)]="user.password" name="pass" #password="ngModel"
              type="password" class="form-control" id="password" placeholder="test123"
              required>
       <span *ngIf="password.invalid && (password.dirty || password.touched)" class="form-control-feedback">
