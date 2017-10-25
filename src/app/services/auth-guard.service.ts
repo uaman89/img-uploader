@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
+import {CanActivate} from '@angular/router';
 import {AuthService} from './auth.service';
 
 const clr = 'background: olive; color: white';

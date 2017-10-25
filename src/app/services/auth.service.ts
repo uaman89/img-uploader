@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {UsersService} from './users.service';
 
-interface UserCredentials {
+export interface IUserCredentials {
   email: string;
   password: string;
 }
@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private users: UsersService) {
   }
 
-  public login(user: UserCredentials) {
+  public login(user: IUserCredentials) {
     this.users.getUsers().then(users => {
       const isUserExists = !!users.find(u => u.email === user.email && u.password === user.password);
 

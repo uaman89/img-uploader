@@ -3,61 +3,61 @@
     {
       "id": 1,
       "name": "testUser",
-      "email": "testEmail@gmail.com",
+      "email": "user@gmail.com",
       "password": "test123"
     },
     {
       "id": 2,
       "name": "testUser2",
-      "email": "testEmail2@gmail.com",
+      "email": "user2@gmail.com",
       "password": "test1232"
     },
     {
       "id": 3,
       "name": "testUser3",
-      "email": "testEmail3@gmail.com",
+      "email": "user3@gmail.com",
       "password": "test1233"
     },
     {
       "id": 4,
       "name": "testUser4",
-      "email": "testEmail4@gmail.com",
+      "email": "user4@gmail.com",
       "password": "test1234"
     },
     {
       "id": 5,
       "name": "testUser5",
-      "email": "testEmail5@gmail.com",
+      "email": "user5@gmail.com",
       "password": "test1235"
     },
     {
       "id": 6,
       "name": "testUser6",
-      "email": "testEmail6@gmail.com",
+      "email": "user6@gmail.com",
       "password": "test1236"
     },
     {
       "id": 7,
       "name": "testUser7",
-      "email": "testEmail7@gmail.com",
+      "email": "user7@gmail.com",
       "password": "test1237"
     },
     {
       "id": 8,
       "name": "testUser8",
-      "email": "testEmail8@gmail.com",
+      "email": "user8@gmail.com",
       "password": "test1238"
     },
     {
       "id": 9,
       "name": "testUser9",
-      "email": "testEmail9@gmail.com",
+      "email": "user9@gmail.com",
       "password": "test1239"
     },
     {
       "id": 10,
       "name": "testUser10",
-      "email": "testEmail10@gmail.com",
+      "email": "user10@gmail.com",
       "password": "test12310"
     }
   ]

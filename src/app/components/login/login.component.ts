@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserCredentials} from '../../services/auth.service';
+import {IUserCredentials} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +8,7 @@ import {UserCredentials} from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public user: UserCredentials = {
+  public user: IUserCredentials = {
     email: '',
     password: ''
   };
