@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {UsersService} from './users.service';
 
 interface UserCredentials {
   email: string;
@@ -9,33 +9,27 @@ interface UserCredentials {
 @Injectable()
 export class AuthService {
 
-  private users: any[];
+  public isAuthorized = false;
 
-  constructor(private http: HttpClient) {
-
-    http.get('/assets/users.json').subscribe(
-      res => {
-        this.users = res['users'];
-      },
-      error => {
-        console.error('at auth_service:', error);
-      }
-    );
-
-  }
-
-  private getUsers() {
-    if (this.users !== undefined) {
-      return this.users;
-    }
+  constructor(private users: UsersService) {
   }
 
   public login(user: UserCredentials) {
+    this.users.getUsers().then(users => {
+      const isUserExists = !!users.find(u => u.email === user.email && u.password === user.password);
 
+      if (isUserExists) {
+        this.isAuthorized = true;
+      } else {
+        this.isAuthorized = false;
+      }
+
+      return this.isAuthorized;
+    });
   }
 
   public logout() {
-
+    this.isAuthorized = false;
   }
 
 }
