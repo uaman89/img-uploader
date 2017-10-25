@@ -15,7 +15,9 @@ export class AuthService {
   }
 
   public login(user: IUserCredentials) {
-    this.users.getUsers().then(users => {
+
+    return this.users.getUsers().then(users => {
+
       const isUserExists = !!users.find(u => u.email === user.email && u.password === user.password);
 
       if (isUserExists) {
@@ -25,6 +27,7 @@ export class AuthService {
       }
 
       return this.isAuthorized;
+
     });
   }
 
