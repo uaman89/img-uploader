@@ -7,7 +7,7 @@ interface UserCredentials {
 }
 
 @Injectable()
-export class AuthServiceService {
+export class AuthService {
 
   private users: any[];
 
