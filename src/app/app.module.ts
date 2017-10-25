@@ -11,7 +11,7 @@ import {TableViewComponent} from './components/table-view/table-view.component';
 import {BlockViewComponent} from './components/block-view/block-view.component';
 import {AppRoutingModule} from './app.routing.module';
 import {UsersService} from './services/users.service';
-import {AuthService} from "./services/auth.service";
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import {AuthService} from "./services/auth.service";
     AppRoutingModule
   ],
   providers: [
-    AuthServiceService
+    UsersService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UsersService} from './services/users.service';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,6 @@ import {UsersService} from './services/users.service';
 export class AppComponent {
   title = 'Img:Uploader';
 
-  constructor(us: UsersService) {
-    console.log(`users:`, us.users);
+  constructor(auth: AuthService) {
   }
 }
