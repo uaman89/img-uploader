@@ -3,11 +3,19 @@
   <nav class="navbar navbar-inverse bg-light">
     <h1 class="navbar-brand mb-0">{{title}}</h1>
 
-    <div class="nav nav-pills">
-      <a routerLink="view/table" routerLinkActive="active" class="nav-link">table</a>
-      <a routerLink="view/blocks" routerLinkActive="active" class="nav-link">block</a>
-      <a routerLink="upload" routerLinkActive="active" class="nav-link">upload</a>
-      <a routerLink="login" routerLinkActive="active" class="nav-link">sign in</a>
+    <div  [ngSwitch]="auth.isAuthorized" class="nav nav-pills">
+
+      <ng-template [ngSwitchCase]="true">
+        <a routerLink="view/table" routerLinkActive="active" class="nav-link">table</a>
+        <a routerLink="view/blocks" routerLinkActive="active" class="nav-link">block</a>
+        <a routerLink="upload" routerLinkActive="active" class="nav-link">upload</a>
+        <a routerLink="logout" routerLinkActive="active" class="nav-link">sign out</a>
+      </ng-template>
+
+      <ng-template [ngSwitchCase]="false">
+        <a routerLink="login" routerLinkActive="active" class="nav-link">sign in</a>
+      </ng-template>
+
     </div>
 
   </nav>
