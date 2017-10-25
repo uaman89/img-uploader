@@ -13,6 +13,7 @@ import {AppRoutingModule} from './app.routing.module';
 import {UsersService} from './services/users.service';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './services/auth-guard.service';
+import { DndDirective } from './directives/dnd.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AuthGuard} from './services/auth-guard.service';
     LoginComponent,
     UploadComponent,
     TableViewComponent,
-    BlockViewComponent
+    BlockViewComponent,
+    DndDirective
   ],
   imports: [
     BrowserModule,
