@@ -39,3 +39,10 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+footer{
+  margin-top:2rem;
+  @extend .bg-light;
+  padding: 1rem;
+  text-align: center;
+}
