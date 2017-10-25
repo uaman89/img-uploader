@@ -1,7 +1,21 @@
-<p>
-  upload works!
-</p>
+<h1>Upload Images</h1>
 
-<div appFilesDnd class="drop-zone">
+<div appFilesDnd  [allowedExtensions]="['jpg','jpeg', 'png']" (onDropFiles)="updatePreviews($event)"  class="drop-zone">
   drag files here
+</div>
+
+<div class="previews">
+
+  <div *ngFor="let preview of previews;" class="preview">
+    File name: {{preview.name}}
+    <br>
+    File size: {{preview.size}}
+    <button (click)="removePreview(preview)" class="btn btn-danger">x</button>
+  </div>
+
+</div>
+
+<div class="text-right">
+  <button (click)="clearAll()" [disabled]="!previews.size" class="btn btn-danger mr-2">Clear all</button>
+  <button (click)="save()" [disabled]="!previews.size" class="btn btn-primary">Save</button>
 </div>
