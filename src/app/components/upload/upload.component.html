@@ -7,9 +7,9 @@
 <div class="previews">
 
   <div *ngFor="let preview of previews;" class="preview">
-    File name: {{preview.name}}
+    File name: {{preview.imageName}}
     <br>
-    File size: {{preview.size}}
+    File size: {{preview.fileSize}}
     <button (click)="removePreview(preview)" class="btn btn-danger">x</button>
   </div>
 
