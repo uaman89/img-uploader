@@ -21,10 +21,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('login!');
     this.auth.login(this.user).then(result => {
       if (result) {
-        console.log('navidate to blocks!');
         this.router.navigate(['view/blocks']);
       } else {
         alert('Wrong user!');
