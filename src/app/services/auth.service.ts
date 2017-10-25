@@ -6,13 +6,24 @@ export interface IUserCredentials {
   password: string;
 }
 
+interface IUser {
+  'id': number;
+  'name': string;
+  'email': string;
+  'password': string;
+}
+
 @Injectable()
 export class AuthService {
 
-  public isAuthorized = false;
+  public user: IUser;
+
+  public get isAuthorized() {
+    return !!this.user;
+  }
 
   constructor(private users: UsersService) {
-    this.isAuthorized = localStorage.getItem('authorizedUser') === 'true';
+    this.user = JSON.parse(localStorage.getItem('authorizedUser'));
   }
 
   public login(credentials: IUserCredentials) {
@@ -22,8 +33,8 @@ export class AuthService {
       const user = users.find(u => u.email === credentials.email && u.password === credentials.password);
 
       if (!!user) {
-        this.isAuthorized = true;
-        localStorage.setItem('authorizedUser', user.id);
+        this.user = user;
+        localStorage.setItem('authorizedUser', JSON.stringify(user));
       } else {
         this.logout();
       }
@@ -34,7 +45,7 @@ export class AuthService {
   }
 
   public logout() {
-    this.isAuthorized = false;
+    this.user = null;
     localStorage.removeItem('authorizedUser');
   }
 
