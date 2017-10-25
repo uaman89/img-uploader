@@ -4,22 +4,31 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class UsersService {
 
-  private users: Promise<any[]>;
+  private cachedUsers: any[];
+  private loadPromise: Promise<any[]>;
 
   constructor(private http: HttpClient) {
     this.load();
   }
 
   public getUsers() {
-    return this.users;
+
+    if (!this.cachedUsers) {
+      return this.loadPromise;
+    } else {
+      return Promise.resolve(this.cachedUsers);
+    }
+
   }
 
   private load() {
-    console.log('load users!');
-    this.users = this.http.get('/assets/users.json').toPromise().then(
+
+    this.cachedUsers = null;
+
+    this.loadPromise = this.http.get('/assets/users.json').toPromise().then(
       res => {
-        this.users = res['users'];
-        return this.users;
+        this.cachedUsers = res['Users'];
+        return this.cachedUsers;
       },
       error => {
         console.error('at auth_service:', error);
