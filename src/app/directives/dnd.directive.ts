@@ -43,15 +43,21 @@ export class DndDirective {
 
     const files = evt.dataTransfer.files;
 
-    let valid_files: Array<File> = [];
+    const valid_files: Array<File> = [];
 
     if (files.length > 0) {
-      valid_files = files.filter((file: File) => {
+      for (const file of files) {
+
+        // todo: check by type
+        // console.log('Type: ', file.type);
         const ext = file.name.split('.')[file.name.split('.').length - 1];
-        return this.allowedExtensions.lastIndexOf(ext) !== -1;
-      });
+        if (this.allowedExtensions.indexOf(ext) !== -1) {
+          valid_files.push(file);
+        }
+      }
       this.onFilesChanged.emit(valid_files);
     }
+
   }
 
 }
