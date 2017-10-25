@@ -1,0 +1,39 @@
+$bgBlue: #82a3e2;
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 150px;
+  justify-content: center;
+  text-align: center;
+  color: #001f44;
+  background: $bgBlue;
+  outline: 2px dashed #335c6c;;
+  outline-offset: -.5em;
+  margin: 1rem;
+
+  transition: background .3s;
+
+  &.drag-over {
+    background: darken($bgBlue, 10%);
+  }
+
+  &.drag-drop {
+    //background: lighten($bgBlue, 25%);
+    animation: lightenBg .5s;
+  }
+
+}
+
+@keyframes lightenBg {
+  0% {
+    background: darken($bgBlue, 10%);
+  }
+  50% {
+    background: lighten($bgBlue, 10%);
+  }
+  100% {
+    background: $bgBlue;
+  }
+}
