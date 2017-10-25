@@ -5,7 +5,7 @@ import {Directive, HostListener, HostBinding, EventEmitter, Output, Input} from 
 })
 export class DndDirective {
   @Input() private allowedExtensions: Array<string> = [];
-  @Output() private onFilesChanged: EventEmitter<File[]> = new EventEmitter();
+  @Output() private onDropFiles: EventEmitter<File[]> = new EventEmitter();
 
   @HostBinding('class.drag-over') isDragOver = false;
   @HostBinding('class.drag-leave') isDragLeave = false;
@@ -55,7 +55,7 @@ export class DndDirective {
           valid_files.push(file);
         }
       }
-      this.onFilesChanged.emit(valid_files);
+      this.onDropFiles.emit(valid_files);
     }
 
   }
