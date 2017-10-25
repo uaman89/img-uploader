@@ -12,6 +12,7 @@ import {BlockViewComponent} from './components/block-view/block-view.component';
 import {AppRoutingModule} from './app.routing.module';
 import {UsersService} from './services/users.service';
 import {AuthService} from './services/auth.service';
+import {AuthGuard} from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {AuthService} from './services/auth.service';
   ],
   providers: [
     UsersService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

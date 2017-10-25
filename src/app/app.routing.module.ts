@@ -4,19 +4,26 @@ import {LoginComponent} from './components/login/login.component';
 import {UploadComponent} from './components/upload/upload.component';
 import {TableViewComponent} from './components/table-view/table-view.component';
 import {BlockViewComponent} from './components/block-view/block-view.component';
+import {AuthGuard} from './services/auth-guard.service';
 
 
 export const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'upload', component: UploadComponent},
   {
-    path: 'view',
+    path: '',
+    canActivate: [AuthGuard],
     children: [
-      {path: 'table', component: TableViewComponent},
-      {path: 'block', component: BlockViewComponent},
+      {path: 'upload', component: UploadComponent},
+      {
+        path: 'view',
+        children: [
+          {path: 'table', component: TableViewComponent},
+          {path: 'block', component: BlockViewComponent},
+        ]
+      },
     ]
   },
-  // {path: '**', redirectTo: '/'}
+  {path: 'login', component: LoginComponent},
+  {path: '**', redirectTo: 'login'}
 ];
 
 
