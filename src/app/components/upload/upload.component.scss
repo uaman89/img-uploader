@@ -48,6 +48,7 @@ $previewHeight: 200px;
 .preview {
 
   .preview-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -94,6 +95,7 @@ $previewHeight: 200px;
     border-radius: 0.8em;
     display: none;
     padding: 0;
+    transform: translate(50%, -50%);
   }
 
   &:hover button {

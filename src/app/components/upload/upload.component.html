@@ -17,8 +17,8 @@
         <span>File name: {{preview.file.name}}</span>
         <span>File size: {{preview.file.size / 1000}} kB</span>
       </div>
+      <button (click)="removePreview(preview)" class="btn btn-danger">&#10799;</button>
     </div>
-    <button (click)="removePreview(preview)" class="btn btn-danger">x</button>
   </div>
 
 
