@@ -1,3 +1,9 @@
+.preview,
+.preview-wrapper,
+.descr{
+  width: 100%;
+}
+
 .preview {
   display: flex;
 
@@ -35,10 +41,11 @@
     }
 
 
-    span {
+    span, small {
       line-height: 1.5em;
-      display: block;
+      //display: block;
       white-space: nowrap;
+
       overflow: hidden;
       text-overflow: ellipsis;
     }
