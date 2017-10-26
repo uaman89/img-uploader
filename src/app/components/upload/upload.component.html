@@ -1,6 +1,6 @@
 <h1>Upload Images</h1>
 
-<div class="wrapper">
+<div class="d-flex flex-wrap wrapper">
 
   <div class="drop-zone" appFilesDnd
        [allowedExtensions]="['jpg','jpeg', 'png']"
@@ -9,9 +9,15 @@
   </div>
 
   <div *ngFor="let preview of previews;" class="preview">
-    <img [src]="preview.src" [alt]="preview.name" [title]="preview.name + ' preview'">
-    <span>File name: {{preview.imageName}}</span>
-    <span>File size: {{preview.fileSize}}</span>
+    <div class="preview-wrapper">
+      <div class="img-wrapper">
+        <img [src]="preview.src" [alt]="preview.name" [title]="preview.file.name">
+      </div>
+      <div class="descr">
+        <span>File name: {{preview.file.name}}</span>
+        <span>File size: {{preview.file.size / 1000}} kB</span>
+      </div>
+    </div>
     <button (click)="removePreview(preview)" class="btn btn-danger">x</button>
   </div>
 
