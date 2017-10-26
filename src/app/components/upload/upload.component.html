@@ -1,17 +1,20 @@
 <h1>Upload Images</h1>
 
-<div appFilesDnd  [allowedExtensions]="['jpg','jpeg', 'png']" (onDropFiles)="updatePreviews($event)"  class="drop-zone">
-  drag files here
-</div>
+<div class="wrapper">
 
-<div class="previews">
+  <div class="drop-zone" appFilesDnd
+       [allowedExtensions]="['jpg','jpeg', 'png']"
+       (onDropFiles)="updatePreviews($event)">
+    drag files here
+  </div>
 
   <div *ngFor="let preview of previews;" class="preview">
-    File name: {{preview.imageName}}
-    <br>
-    File size: {{preview.fileSize}}
+    <img [src]="preview.src" [alt]="preview.name" [title]="preview.name + ' preview'">
+    <span>File name: {{preview.imageName}}</span>
+    <span>File size: {{preview.fileSize}}</span>
     <button (click)="removePreview(preview)" class="btn btn-danger">x</button>
   </div>
+
 
 </div>
 

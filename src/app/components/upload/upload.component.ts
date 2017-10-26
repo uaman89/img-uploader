@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {KEY_UPLOADED_IMAGES} from '../../constants';
 
 interface IImageModel {
   'id': number;
@@ -16,7 +17,7 @@ interface IImageModel {
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  public previews: Set<IImageModel> = new Set([]);
+  public previews: Set<{ file: File, src: Blob }> = new Set([]);
 
   constructor(private auth: AuthService, private router: Router) {
   }
@@ -29,17 +30,45 @@ export class UploadComponent implements OnInit {
     files.map((f: File) => {
 
       if (f.type.indexOf('image') !== -1) {
-        this.previews.add({
-          id: Date.now(),
-          imageName: f.name,
-          fileSize: `${f.size / 1000} kB`,
-          checksum: `getChecksum()`,
-          uploadedUser: this.auth.user.id
-        });
+
+        this.getPreviewSrc(f).then(
+          (blob: Blob) => {
+            this.previews.add({
+              file: f,
+              src: blob
+            });
+          },
+          error => {
+            console.error(`at updatePreviews(): can't get preview for ${f.name}`);
+          }
+        );
+
       } else {
         console.warn(`${f.name} isn't an image!`);
       }
 
+    });
+  }
+
+  public getPreviewSrc(imgFile): Promise<Blob> {
+
+    return new Promise((resolve, reject) => {
+      const fReader = new FileReader();
+
+      fReader.onload = () => {
+        resolve(fReader.result);
+      };
+
+      fReader.onerror = () => {
+        reject(null);
+      };
+
+      // Read the file to DataURL format.
+      try {
+        fReader.readAsDataURL(imgFile);
+      } catch (error) {
+        console.error('at getPreviewSrc():', error);
+      }
     });
   }
 
@@ -56,12 +85,18 @@ export class UploadComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    let uploadedImages: IImageModel[] = JSON.parse(localStorage.getItem('uploadedImages'));
-    if (!(uploadedImages instanceof Array)) {
-      uploadedImages = [];
+    let imagesToUpload: IImageModel[] = JSON.parse(localStorage.getItem(KEY_UPLOADED_IMAGES));
+    if (!(imagesToUpload instanceof Array)) {
+      imagesToUpload = [];
     }
-    this.previews.forEach(value => uploadedImages.push(value));
-    localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
+    this.previews.forEach(p => imagesToUpload.push(<IImageModel>{
+      id: Date.now(),
+      imageName: p.file.name,
+      fileSize: `${p.file.size / 1000} kB`,
+      checksum: `getChecksum()`,
+      uploadedUser: this.auth.user.id,
+    }));
+    localStorage.setItem(KEY_UPLOADED_IMAGES, JSON.stringify(imagesToUpload));
     this.clearAll();
   }
 }
