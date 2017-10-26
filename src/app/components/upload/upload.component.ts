@@ -1,22 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {KEY_UPLOADED_IMAGES, PATH_LOGIN} from '../../constants';
+import {PATH_LOGIN} from '../../constants';
 import {sha256} from 'js-sha256';
+import {IImageModel, ImageStoreService} from '../../services/image-store.service';
 
-interface IImageModel {
-  'id': number;
-  'imageName': string;
-  'fileSize': string; // example 114.6 kB
-  'checksum': string; // SHA256
-  'uploadedUser': number; // user id
-}
-
-interface IPreviewItem {
-  file: File;
-  src: Blob;
-  sha: string;
-}
 
 @Component({
   selector: 'app-upload',
@@ -25,9 +13,9 @@ interface IPreviewItem {
 })
 export class UploadComponent implements OnInit {
 
-  public previews: IPreviewItem[] = [];
+  public previews: IImageModel[] = [];
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private images: ImageStoreService, private auth: AuthService, private router: Router) {
   }
 
   // todo: detect localStorage changes
@@ -45,11 +33,14 @@ export class UploadComponent implements OnInit {
 
             const sha = sha256(blob);
 
-            if (!this.previews.find(p => p.sha === sha)) {
+            if (!this.previews.find(p => p.checksum === sha)) {
               this.previews.push({
-                file: f,
-                src: blob,
-                sha: sha
+                id: Date.now(), // todo: GUID?
+                imageName: f.name,
+                fileSize: `${f.size / 1000} kB`,
+                checksum: sha,
+                uploadedUser: this.auth.user.id,
+                blob: blob,
               });
             }
 
@@ -102,20 +93,9 @@ export class UploadComponent implements OnInit {
       this.router.navigate([PATH_LOGIN]);
       return;
     }
-    let imagesToUpload: IImageModel[] = JSON.parse(localStorage.getItem(KEY_UPLOADED_IMAGES));
-    if (!(imagesToUpload instanceof Array)) {
-      imagesToUpload = [];
-    }
 
-    this.previews.forEach(p => imagesToUpload.push(<IImageModel>{
-      id: Date.now(), // todo: GUID?
-      imageName: p.file.name,
-      fileSize: `${p.file.size / 1000} kB`,
-      checksum: p.sha,
-      uploadedUser: this.auth.user.id,
-    }));
+    this.images.saveToStore(this.previews);
 
-    localStorage.setItem(KEY_UPLOADED_IMAGES, JSON.stringify(imagesToUpload));
     this.clearAll();
   }
 }
