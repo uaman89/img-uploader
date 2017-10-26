@@ -55,4 +55,8 @@ export class ImageStoreService {
 
   }
 
+  public clear() {
+    this.writeToStore([]);
+  }
+
 }
