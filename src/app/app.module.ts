@@ -14,6 +14,7 @@ import {UsersService} from './services/users.service';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './services/auth-guard.service';
 import { DndDirective } from './directives/dnd.directive';
+import {ImageStoreService} from './services/image-store.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DndDirective } from './directives/dnd.directive';
   providers: [
     UsersService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    ImageStoreService
   ],
   bootstrap: [AppComponent]
 })
