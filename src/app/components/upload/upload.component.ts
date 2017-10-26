@@ -15,7 +15,8 @@ interface IImageModel {
 interface IPreviewItem {
   file: File;
   src: Blob;
-};
+  sha: string;
+}
 
 @Component({
   selector: 'app-upload',
@@ -24,8 +25,7 @@ interface IPreviewItem {
 })
 export class UploadComponent implements OnInit {
 
-  public previewKeys: IterableIterator<string>;
-  public previews: Map<string, IPreviewItem>;
+  public previews: IPreviewItem[] = [];
 
   constructor(private auth: AuthService, private router: Router) {
   }
@@ -33,7 +33,6 @@ export class UploadComponent implements OnInit {
   // todo: detect localStorage changes
 
   ngOnInit() {
-    this.previews = new Map();
   }
 
   public updatePreviews(files) {
@@ -46,17 +45,17 @@ export class UploadComponent implements OnInit {
 
             const sha = sha256(blob);
 
-            this.previews.set(sha, {
-              file: f,
-              src: blob
-            });
-
-            // todo: think about this...
-            this.previewKeys = this.previews.keys();
+            if (!this.previews.find(p => p.sha === sha)) {
+              this.previews.push({
+                file: f,
+                src: blob,
+                sha: sha
+              });
+            }
 
           },
           error => {
-            console.error(`at updatePreviews(): can't get preview for ${f.name}`);
+            console.error(`at updatePreviews(): can't get preview for ${f.name}`, error);
           }
         );
 
@@ -90,12 +89,12 @@ export class UploadComponent implements OnInit {
     });
   }
 
-  public removePreview(key) {
-    this.previews.delete(key);
+  public removePreview(index: number) {
+    this.previews.splice(index, 1);
   }
 
   public clearAll() {
-    this.previews.clear();
+    this.previews = [];
   }
 
   save() {
@@ -108,11 +107,11 @@ export class UploadComponent implements OnInit {
       imagesToUpload = [];
     }
 
-    this.previews.forEach((p, shaKey) => imagesToUpload.push(<IImageModel>{
-      id: Date.now(),
+    this.previews.forEach(p => imagesToUpload.push(<IImageModel>{
+      id: Date.now(), // todo: GUID?
       imageName: p.file.name,
       fileSize: `${p.file.size / 1000} kB`,
-      checksum: shaKey,
+      checksum: p.sha,
       uploadedUser: this.auth.user.id,
     }));
 
