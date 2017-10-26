@@ -7,7 +7,7 @@
 //@import "~bootstrap/scss/type";
 //@import "~bootstrap/scss/images";
 //@import "~bootstrap/scss/code";
-//@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/grid";
 //@import "~bootstrap/scss/tables";
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
@@ -47,4 +47,14 @@ footer{
   @extend .bg-light;
   padding: 1rem;
   text-align: center;
+}
+
+.image-preview-block{
+  display: flex;
+  @extend .col-xl-2;
+  @extend .col-lg-3;
+  @extend .col-md-4;
+  @extend .col-sm-6;
+  @extend .col-12;
+  margin-bottom: 1rem;
 }

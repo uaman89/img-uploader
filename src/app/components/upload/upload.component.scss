@@ -1,7 +1,7 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/grid";
+//@import "~bootstrap/scss/functions";
+//@import "~bootstrap/scss/variables";
+//@import "~bootstrap/scss/mixins";
+//@import "~bootstrap/scss/grid";
 
 $bgBlue: #82a3e2;
 $previewHeight: 200px;
@@ -12,14 +12,7 @@ $previewHeight: 200px;
 
   > .drop-zone ,
   > app-image-preview {
-    display: flex;
     height: $previewHeight;
-    @extend .col-xl-2;
-    @extend .col-lg-3;
-    @extend .col-md-4;
-    @extend .col-sm-6;
-    @extend .col-12;
-    margin-bottom: 1rem;
   }
 
 }

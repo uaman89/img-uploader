@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IImageModel} from '../../services/image-store.service';
+import {IImageModel} from 'app/services/image-store.service';
 
 @Component({
   selector: 'app-image-preview',
@@ -15,7 +15,7 @@ export class ImagePreviewBlockComponent implements OnInit {
    */
   @Input() descrMode: string;
 
-  @Input() imageData: IImageModel;
+  @Input() imageData: IImageModel = <IImageModel>{};
 
   @Output() onDelete: EventEmitter<null> = new EventEmitter();
 

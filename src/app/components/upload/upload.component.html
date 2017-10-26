@@ -2,7 +2,7 @@
 
 <div class="d-flex flex-wrap wrapper">
 
-  <div class="drop-zone" appFilesDnd
+  <div class="drop-zone image-preview-block" appFilesDnd
        [allowedExtensions]="['jpg','jpeg', 'png']"
        (onDropFiles)="updatePreviews($event)">
     drag files here
@@ -11,7 +11,8 @@
 
   <app-image-preview *ngFor="let preview of previews; let i = index"
                      [imageData]="preview"
-                     (onDelete)="removePreview(i)"></app-image-preview>
+                     (onDelete)="removePreview(i)"
+                     class="image-preview-block"></app-image-preview>
 
 </div>
 
