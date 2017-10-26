@@ -8,7 +8,7 @@ import {IImageModel} from 'app/services/image-store.service';
 })
 export class ImagePreviewBlockComponent implements OnInit {
 
-  @Input() imageData: IImageModel = <IImageModel>{};
+  @Input() imageData: IImageModel;
 
   /**
    * @type string
