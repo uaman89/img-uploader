@@ -5,7 +5,7 @@ import {UsersService} from '../../services/users.service';
 @Component({
   selector: 'app-block-view',
   templateUrl: './block-view.component.html',
-  styleUrls: ['./block-view.component.scss']
+  styles: []
 })
 export class BlockViewComponent implements OnInit {
 
@@ -15,16 +15,22 @@ export class BlockViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    const savedImages = this.imageStore.getFromStore();
 
-    this.images = savedImages.map(img => {
+    this.imageStore.list.subscribe(storedImages => {
 
-      this.userService.getUsers().then(list => {
-        img['uploadUserName'] = (list.find(u => u.id === img.uploadedUser)).name;
+      this.images = storedImages.map(img => {
+        this.userService.getUsers().then(list => {
+          img['uploadUserName'] = (list.find(u => u.id === img.uploadedUser)).name;
+        });
+        return img;
       });
 
-      return img;
     });
+
+  }
+
+  delImage(index) {
+    this.imageStore.deleteImage(this.images[index].checksum);
   }
 
 }

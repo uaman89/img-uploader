@@ -8,14 +8,14 @@ import {IImageModel} from 'app/services/image-store.service';
 })
 export class ImagePreviewBlockComponent implements OnInit {
 
+  @Input() imageData: IImageModel = <IImageModel>{};
+
   /**
    * @type string
    * @default 'short'
    * There are two options: 'short' or 'full'
    */
   @Input() descrMode: string;
-
-  @Input() imageData: IImageModel = <IImageModel>{};
 
   @Output() onDelete: EventEmitter<null> = new EventEmitter();
 

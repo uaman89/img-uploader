@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {KEY_UPLOADED_IMAGES} from '../constants';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 export interface IImageModel {
   'id': number;
@@ -14,7 +15,12 @@ export interface IImageModel {
 @Injectable()
 export class ImageStoreService {
 
+  public list: BehaviorSubject<IImageModel[]> = new BehaviorSubject([]);
+
   constructor() {
+
+    this.list.next(this.getFromStore());
+
   }
 
   public getFromStore(): IImageModel[] {
@@ -34,11 +40,12 @@ export class ImageStoreService {
       return checksumList.indexOf(img.checksum) === -1;
     });
 
-    this.writeToStore( imagesToUpload.concat(savedImages) );
+    this.writeToStore(imagesToUpload.concat(savedImages));
   }
 
   private writeToStore(images) {
     localStorage.setItem(KEY_UPLOADED_IMAGES, JSON.stringify(images));
+    this.list.next(images);
   }
 
   public deleteImage(checksum) {
