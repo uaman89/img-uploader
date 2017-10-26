@@ -1,0 +1,26 @@
+<div class="preview">
+  <div class="preview-wrapper">
+
+    <div class="img-wrapper">
+      <img [src]="imageData.blob" [alt]="imageData.imageName" [title]="imageData.imageName">
+    </div>
+
+    <div [ngSwitch]="descrMode" class="descr {{descrMode}}">
+
+      <ng-template [ngSwitchCase]="'full'">
+        <span>{{imageData.imageName}}</span>
+        <span>{{imageData?.uploadUserName}}</span>
+        <small>{{imageData.fileSize}}</small>
+        <small>{{imageData.checksum}}</small>
+      </ng-template>
+
+      <ng-template ngSwitchDefault>
+        <span>{{imageData.imageName}}</span>
+        <small>{{imageData.fileSize}}</small>
+      </ng-template>
+
+    </div>
+    <button (click)="onDeleteClick()" class="btn btn-danger">&#10799;</button>
+
+  </div>
+</div>
