@@ -25,15 +25,25 @@ export class ImageStoreService {
     return uploadedImages;
   }
 
-  public saveToStore(images: IImageModel[]) {
+  public upload(images: IImageModel[]) {
 
     const savedImagesChecksum = this.getFromStore().map((img: IImageModel) => img.checksum);
 
     const imagesToUpload = images.filter((img: IImageModel) => {
       return savedImagesChecksum.indexOf(img.checksum) === -1;
     });
+    this.saveToStore(imagesToUpload);
+  }
 
-    localStorage.setItem(KEY_UPLOADED_IMAGES, JSON.stringify(imagesToUpload));
+  private saveToStore(images) {
+    localStorage.setItem(KEY_UPLOADED_IMAGES, JSON.stringify(images));
+  }
+
+  public deleteImage(checksum) {
+
+    const images = this.getFromStore().filter(i => i.checksum !== checksum);
+    this.saveToStore(images);
+
   }
 
 }
