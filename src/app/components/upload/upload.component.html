@@ -8,16 +8,16 @@
     drag files here
   </div>
 
-  <div *ngFor="let preview of previews;" class="preview">
+  <div *ngFor="let key of previewKeys" class="preview">
     <div class="preview-wrapper">
       <div class="img-wrapper">
-        <img [src]="preview.src" [alt]="preview.name" [title]="preview.file.name">
+        <img [src]="previews.get(key).src" [alt]="previews.get(key).name" [title]="previews.get(key).file.name">
       </div>
       <div class="descr">
-        <span>File name: {{preview.file.name}}</span>
-        <span>File size: {{preview.file.size / 1000}} kB</span>
+        <span>File name: {{previews.get(key).file.name}}</span>
+        <span>File size: {{previews.get(key).file.size / 1000}} kB</span>
       </div>
-      <button (click)="removePreview(preview)" class="btn btn-danger">&#10799;</button>
+      <button (click)="removePreview(key)" class="btn btn-danger">&#10799;</button>
     </div>
   </div>
 

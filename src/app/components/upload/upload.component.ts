@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {KEY_UPLOADED_IMAGES, PATH_LOGIN} from '../../constants';
+import {sha256} from 'js-sha256';
 
 interface IImageModel {
   'id': number;
@@ -11,13 +12,20 @@ interface IImageModel {
   'uploadedUser': number; // user id
 }
 
+interface IPreviewItem {
+  file: File;
+  src: Blob;
+};
+
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  public previews: Set<{ file: File, src: Blob }> = new Set([]);
+
+  public previewKeys: IterableIterator<string>;
+  public previews: Map<string, IPreviewItem>;
 
   constructor(private auth: AuthService, private router: Router) {
   }
@@ -25,20 +33,27 @@ export class UploadComponent implements OnInit {
   // todo: detect localStorage changes
 
   ngOnInit() {
+    this.previews = new Map();
   }
 
   public updatePreviews(files) {
-    // todo: detect duplicates
     files.map((f: File) => {
 
       if (f.type.indexOf('image') !== -1) {
 
         this.getPreviewSrc(f).then(
           (blob: Blob) => {
-            this.previews.add({
+
+            const sha = sha256(blob);
+
+            this.previews.set(sha, {
               file: f,
               src: blob
             });
+
+            // todo: think about this...
+            this.previewKeys = this.previews.keys();
+
           },
           error => {
             console.error(`at updatePreviews(): can't get preview for ${f.name}`);
@@ -50,6 +65,7 @@ export class UploadComponent implements OnInit {
       }
 
     });
+
   }
 
   public getPreviewSrc(imgFile): Promise<Blob> {
@@ -74,8 +90,8 @@ export class UploadComponent implements OnInit {
     });
   }
 
-  public removePreview(preview) {
-    this.previews.delete(preview);
+  public removePreview(key) {
+    this.previews.delete(key);
   }
 
   public clearAll() {
@@ -91,13 +107,15 @@ export class UploadComponent implements OnInit {
     if (!(imagesToUpload instanceof Array)) {
       imagesToUpload = [];
     }
-    this.previews.forEach(p => imagesToUpload.push(<IImageModel>{
+
+    this.previews.forEach((p, shaKey) => imagesToUpload.push(<IImageModel>{
       id: Date.now(),
       imageName: p.file.name,
       fileSize: `${p.file.size / 1000} kB`,
-      checksum: `getChecksum()`,
+      checksum: shaKey,
       uploadedUser: this.auth.user.id,
     }));
+
     localStorage.setItem(KEY_UPLOADED_IMAGES, JSON.stringify(imagesToUpload));
     this.clearAll();
   }
