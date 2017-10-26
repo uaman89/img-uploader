@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {KEY_UPLOADED_IMAGES} from '../../constants';
+import {KEY_UPLOADED_IMAGES, PATH_LOGIN} from '../../constants';
 
 interface IImageModel {
   'id': number;
@@ -21,6 +21,8 @@ export class UploadComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router) {
   }
+
+  // todo: detect localStorage changes
 
   ngOnInit() {
   }
@@ -82,7 +84,7 @@ export class UploadComponent implements OnInit {
 
   save() {
     if (!this.auth.isAuthorized) {
-      this.router.navigate(['/login']);
+      this.router.navigate([PATH_LOGIN]);
       return;
     }
     let imagesToUpload: IImageModel[] = JSON.parse(localStorage.getItem(KEY_UPLOADED_IMAGES));
