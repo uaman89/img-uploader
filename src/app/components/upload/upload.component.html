@@ -8,19 +8,10 @@
     drag files here
   </div>
 
-  <div *ngFor="let preview of previews; let i = index" class="preview">
-    <div class="preview-wrapper">
-      <div class="img-wrapper">
-        <img [src]="preview.blob" [alt]="preview.fileName" [title]="preview.fileName">
-      </div>
-      <div class="descr">
-        <span>{{preview.imageName}}</span>
-        <small>{{preview.fileSize}}</small>
-      </div>
-      <button (click)="removePreview(i)" class="btn btn-danger">&#10799;</button>
-    </div>
-  </div>
 
+  <app-image-preview *ngFor="let preview of previews; let i = index"
+                     [imageData]="preview"
+                     (onDelete)="removePreview(i)"></app-image-preview>
 
 </div>
 
