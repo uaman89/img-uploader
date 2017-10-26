@@ -15,6 +15,7 @@ import {AuthService} from './services/auth.service';
 import {AuthGuard} from './services/auth-guard.service';
 import { DndDirective } from './directives/dnd.directive';
 import {ImageStoreService} from './services/image-store.service';
+import { ImagePreviewBlockComponent } from './components/image-preview-block/image-preview-block.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {ImageStoreService} from './services/image-store.service';
     UploadComponent,
     TableViewComponent,
     BlockViewComponent,
-    DndDirective
+    DndDirective,
+    ImagePreviewBlockComponent
   ],
   imports: [
     BrowserModule,
