@@ -6,3 +6,7 @@
                      (onDelete)="delImage(i)"
                      class="image-preview-block"></app-image-preview>
 </div>
+
+<div *ngIf="!images.length" class="alert alert-info text-center">
+  no images, yet...
+</div>
