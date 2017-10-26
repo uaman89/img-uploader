@@ -5,6 +5,7 @@ import {UploadComponent} from './components/upload/upload.component';
 import {TableViewComponent} from './components/table-view/table-view.component';
 import {BlockViewComponent} from './components/block-view/block-view.component';
 import {AuthGuard} from './services/auth-guard.service';
+import {PATH_LOGIN} from './constants';
 
 
 export const appRoutes: Routes = [
@@ -22,8 +23,8 @@ export const appRoutes: Routes = [
       },
     ]
   },
-  {path: 'login', component: LoginComponent},
-  {path: '**', redirectTo: 'login'}
+  {path: PATH_LOGIN, component: LoginComponent},
+  {path: '**', redirectTo: PATH_LOGIN}
 ];
 
 

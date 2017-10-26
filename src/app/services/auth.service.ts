@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UsersService} from './users.service';
+import {KEY_AUTH_USER} from '../constants';
 
 export interface IUserCredentials {
   email: string;
@@ -23,7 +24,7 @@ export class AuthService {
   }
 
   constructor(private users: UsersService) {
-    this.user = JSON.parse(localStorage.getItem('authorizedUser'));
+    this.user = JSON.parse(localStorage.getItem(KEY_AUTH_USER));
   }
 
   public login(credentials: IUserCredentials) {
@@ -34,7 +35,7 @@ export class AuthService {
 
       if (!!user) {
         this.user = user;
-        localStorage.setItem('authorizedUser', JSON.stringify(user));
+        localStorage.setItem(KEY_AUTH_USER, JSON.stringify(user));
       } else {
         this.logout();
       }
@@ -46,7 +47,7 @@ export class AuthService {
 
   public logout() {
     this.user = null;
-    localStorage.removeItem('authorizedUser');
+    localStorage.removeItem(KEY_AUTH_USER);
   }
 
 }

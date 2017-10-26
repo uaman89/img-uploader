@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService, IUserCredentials} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {PATH_BLOCKS} from '../../constants';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth.login(this.user).then(result => {
       if (result) {
-        this.router.navigate(['view/blocks']);
+        this.router.navigate([PATH_BLOCKS]);
       } else {
         alert('Wrong user!');
       }
