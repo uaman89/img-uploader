@@ -94,7 +94,7 @@ export class UploadComponent implements OnInit {
       return;
     }
 
-    this.images.saveToStore(this.previews);
+    this.images.upload(this.previews);
 
     this.clearAll();
   }
