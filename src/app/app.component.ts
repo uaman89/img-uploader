@@ -5,8 +5,7 @@ import {PATH_BLOCKS, PATH_LOGIN} from './constants';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'Img:Uploader';

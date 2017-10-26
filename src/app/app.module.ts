@@ -21,11 +21,11 @@ import { ImagePreviewBlockComponent } from './components/image-preview-block/ima
   declarations: [
     AppComponent,
     LoginComponent,
+    DndDirective,
     UploadComponent,
+    ImagePreviewBlockComponent,
     TableViewComponent,
     BlockViewComponent,
-    DndDirective,
-    ImagePreviewBlockComponent
   ],
   imports: [
     BrowserModule,
