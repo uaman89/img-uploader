@@ -49,6 +49,7 @@ export class DndDirective {
       for (const file of files) {
 
         // todo: check by type
+        // tod: add warning about wrong ext
         // console.log('Type: ', file.type);
         const ext = file.name.split('.')[file.name.split('.').length - 1];
         if (this.allowedExtensions.indexOf(ext) !== -1) {

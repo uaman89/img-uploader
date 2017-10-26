@@ -26,13 +26,21 @@ export class UploadComponent implements OnInit {
 
   public updatePreviews(files) {
     // todo: detect duplicates
-    files.map((f: File) => this.previews.add({
-      id: Date.now(),
-      imageName: f.name,
-      fileSize: `${f.size / 1000} kB`,
-      checksum: `getChecksum()`,
-      uploadedUser: this.auth.user.id
-    }));
+    files.map((f: File) => {
+
+      if (f.type.indexOf('image') !== -1) {
+        this.previews.add({
+          id: Date.now(),
+          imageName: f.name,
+          fileSize: `${f.size / 1000} kB`,
+          checksum: `getChecksum()`,
+          uploadedUser: this.auth.user.id
+        });
+      } else {
+        console.warn(`${f.name} isn't an image!`);
+      }
+
+    });
   }
 
   public removePreview(preview) {
