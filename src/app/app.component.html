@@ -1,9 +1,9 @@
 <header>
 
-  <nav class="navbar navbar-inverse bg-light">
+  <nav class="navbar navbar-light bg-faded flex-row">
     <span class="navbar-brand mb-0">{{title}}</span>
 
-    <div *ngIf="auth.isAuthorized" class="nav nav-pills">
+    <div *ngIf="auth.isAuthorized" class="nav nav-pills ml-auto">
         <a routerLink="view/table" routerLinkActive="active" class="nav-link">table</a>
         <a routerLink="view/blocks" routerLinkActive="active" class="nav-link">block</a>
         <a routerLink="upload" routerLinkActive="active" class="nav-link">upload</a>

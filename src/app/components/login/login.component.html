@@ -4,10 +4,16 @@
     <div class="form-group" [class.has-danger]="email.invalid">
       <label for="email">Email</label>
       <input [(ngModel)]="user.email" name="email" #email="ngModel"
-             type="email" class="form-control" id="email" placeholder="user@gmail.com"
-             required>
+             [email]="true" required
+             type="email" class="form-control" id="email" placeholder="user@gmail.com">
+
       <span *ngIf="email.invalid && (email.dirty || email.touched)" class="form-control-feedback">
+        <div [hidden]="!email.errors.required">
           Email is required
+        </div>
+        <div [hidden]="!email.errors">
+          Please input a valid email.
+        </div>
       </span>
     </div>
     <div class="form-group" [class.has-danger]="password.invalid">
