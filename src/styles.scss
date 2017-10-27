@@ -34,7 +34,6 @@
 //@import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/utilities";
 
-
 //@import "~bootstrap/scss/bootstrap";
 
 html, body {
@@ -42,14 +41,14 @@ html, body {
   padding: 0;
 }
 
-footer{
-  margin-top:2rem;
+footer {
+  margin-top: 2rem;
   @extend .bg-light;
   padding: 1rem;
   text-align: center;
 }
 
-.image-preview-block{
+.image-preview-block {
   display: flex;
   @extend .col-xl-2;
   @extend .col-lg-3;
@@ -57,5 +56,5 @@ footer{
   @extend .col-sm-6;
   @extend .col-12;
   margin-bottom: 1rem;
-  height:250px;
+  height: 310px;
 }
