@@ -1,12 +1,12 @@
 <h1>Uploaded images</h1>
 <div class="d-flex flex-wrap">
-  <app-image-preview *ngFor="let image of images; let i = index"
+  <app-image-preview *ngFor="let image of view.images; let i = index"
                      [imageData]="image"
                      [descrMode]="'full'"
-                     (onDelete)="delImage(i)"
+                     (onDelete)="view.delImage(i)"
                      class="image-preview-block"></app-image-preview>
 </div>
 
-<div *ngIf="!images.length" class="alert alert-info text-center">
+<div *ngIf="!view.images.length" class="alert alert-info text-center">
   no images, yet...
 </div>
