@@ -4,9 +4,12 @@
 
   <div class="drop-zone image-preview-block" appFilesDnd
        [allowedExtensions]="['jpg','jpeg', 'png']"
-       (onDropFiles)="updatePreviews($event)">
-    drag files here
+       (onDropFiles)="updatePreviews($event)"
+       (click)="fileInput.click()">
+    <strong>Click</strong> or drag files here
   </div>
+  <input type="file" multiple accept="image/jpeg,image/png" style="display:none"
+         (change)="onInputFileChange($event)" #fileInput>
 
 
   <app-image-preview *ngFor="let preview of previews; let i = index"

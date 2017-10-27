@@ -23,6 +23,11 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
   }
 
+  public onInputFileChange(event) {
+    const files = [].slice.apply(event.srcElement.files);
+    this.updatePreviews(files);
+  }
+
   public updatePreviews(files) {
     files.map((f: File) => {
 
@@ -88,7 +93,7 @@ export class UploadComponent implements OnInit {
     this.previews = [];
   }
 
-  save() {
+  public save() {
     if (!this.auth.isAuthorized) {
       this.router.navigate([PATH_LOGIN]);
       return;
