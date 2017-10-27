@@ -8,7 +8,7 @@ import {IImageModel} from 'app/services/image-store.service';
 })
 export class ImagePreviewBlockComponent implements OnInit {
 
-  @Input() imageData: IImageModel;
+  @Input() public imageData = <IImageModel>{}; // workaround for https://github.com/angular/angular-cli/issues/2034#issuecomment-302666897
 
   /**
    * @type string
