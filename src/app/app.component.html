@@ -4,10 +4,10 @@
     <span class="navbar-brand mb-0">{{title}}</span>
 
     <div *ngIf="auth.isAuthorized" class="nav nav-pills ml-auto">
-        <a routerLink="view/table" routerLinkActive="active" class="nav-link">table</a>
-        <a routerLink="view/blocks" routerLinkActive="active" class="nav-link">block</a>
-        <a routerLink="upload" routerLinkActive="active" class="nav-link">upload</a>
-        <a (click)="logout($event)" href="#" class="nav-link">sign out</a>
+      <a routerLink="view/table" routerLinkActive="active" class="nav-link">table</a>
+      <a routerLink="view/blocks" routerLinkActive="active" class="nav-link">block</a>
+      <a routerLink="upload" routerLinkActive="active" class="nav-link">upload</a>
+      <a (click)="logout($event)" href="#" class="nav-link">sign out</a>
     </div>
 
   </nav>
@@ -19,12 +19,21 @@
 </div>
 
 <footer>
-
-  <p> {{auth.user?.name }}, {{auth.user?.email }}</p>
-  <a routerLink="view/table">table</a>
-  <a routerLink="view/block">block</a>
-  <a routerLink="upload">upload</a>
-  <a routerLink="login">sign in</a>
-  <small>Footer should have separate component and service for data handling. WAT???</small>
+  <div *ngIf="auth.isAuthorized" class="d-flex p-1 justify-content-around">
+    <span> {{auth.user?.name }}, {{auth.user?.email }}</span>
+    <span class="d-flex w-50 justify-content-around">
+      [
+      <a routerLink="view/table">table</a> •
+      <a routerLink="view/block">block</a> •
+      <a routerLink="upload">upload</a> •
+      <a (click)="logout($event)" href="#"> exit </a>
+      ]
+    </span>
+  </div>
+  <hr>
+  <div class="text-center">
+    <strong class="text-muted">Img☺Uploader</strong>
+  </div>
+  <!--<small>Footer should have separate component and service for data handling. WAT???</small>-->
 
 </footer>
