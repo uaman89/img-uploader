@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {ViewService} from '../../services/view.service';
 
 @Component({
   selector: 'app-table-view',
   templateUrl: './table-view.component.html',
-  styleUrls: ['./table-view.component.scss']
+  styleUrls: ['./table-view.component.scss'],
+  providers: [ViewService]
 })
-export class TableViewComponent implements OnInit {
+export class TableViewComponent {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public view: ViewService) {
   }
 
 }

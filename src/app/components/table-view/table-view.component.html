@@ -1,3 +1,28 @@
-<p>
-  table-view works!
-</p>
+<h1>Uploaded images</h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Image Name</th>
+    <th>Uploaded Name</th>
+    <th>Checksum</th>
+    <th>Events</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr *ngFor="let image of view.images; let i = index">
+    <th scope="row">{{ image?.id }}</th>
+    <td>{{ image?.imageName }}</td>
+    <td>{{ image?.uploadUserName }}</td>
+    <td class="checksum">{{ image?.checksum }}</td>
+    <td class="text-center">
+      <button class="btn btn-info">View</button>
+      <button class="btn btn-danger" (click)="view.delImage(i)">Delete</button>
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+
